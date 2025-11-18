@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    .wrapper {
+      display: flex;
+      padding-top: 60px;
+      justify-content: center;
+      gap: 10px;
+    }
+    .inner {
+      border-radius: 2000px;
+      width: 100px; height: 100px;
+      background-color: #bbb;
+      cursor: pointer;
+      transition: 0.5s;
+    }
+    .inner:hover {
+      background-color: var(--t-color);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="inner" style="--t-color: red;"></div>
+    <div class="inner" style="--t-color: orange;"></div>
+    <div class="inner" style="--t-color: green;"></div>
+  </div>
+</body>
+
+</html>

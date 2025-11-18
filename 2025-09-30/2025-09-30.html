@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>즐거운 한가위</title>
+
+    <style>
+        #big-container {
+            background-color: aqua;
+            width: 500px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 10px solid purple;
+            border-radius: 50px;
+        }
+        .small-container {
+            background-color: red;
+            width: 30px;
+            height: 30px;
+            margin: 10px;
+            border: 1px solid white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="big-container">
+        <div class="small-container">1</div>
+        <div class="small-container">1</div>
+        <div class="small-container">1</div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <img style="--num: 0;" src="./oiia-cat.gif">
+    <img style="--num: 1;" src="./nyan-cat.gif">
+    <img style="--num: 2;" src="./rick-roll.gif">
+    <style>
+        img {
+            position: fixed;
+            right: calc(50px * var(--num)); bottom: 0;
+            width: 50px; aspect-ratio: 1;
+        }
+    </style>
+</body>
+
+</html>
