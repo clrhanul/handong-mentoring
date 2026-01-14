@@ -1,0 +1,25 @@
+.user-profile-card {
+    display: grid;
+    height: 155px;
+    grid-template-rows: 2fr 1.2fr;
+    padding: 0;
+    overflow: hidden;
+}
+.profile-sc {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr 0fr);
+    border-top: 1px solid var(--border-color);
+}
+.profile-sc p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+div.img.profile-img {
+    width: 80px; height: 80px;
+    background-image: url(../images/user_profile.png);
+    background-size: contain;
+    border-radius: 500px;
+    border: 1px solid lightgray;
+    transform: scale(0.7);
+}

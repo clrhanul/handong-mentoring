@@ -1,0 +1,204 @@
+/** 내 스타일에 맞게 HTML 태그 조정 **/
+/* 모든 태그의 기본 스타일 조정 */
+* {
+    margin: 0; padding: 0; border: 0;
+    background-color: transparent;
+}
+
+/* 루트 컨테이너 설정 */
+html {
+    width: 100%; height: 100%;
+    font-family: "Noto Sans KR";
+}
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+#root {
+    display: flex;
+    position: relative;
+    width: 1280px;
+    min-height: 900px;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 52px; /* header height */
+}
+
+/* 기본 스타일 조정 */
+a {
+    display: block;
+    color: black;
+    text-decoration-line: none;
+}
+img {
+    width: 100%;
+}
+
+/* 템플릿 설정 */
+div.flex-v, div.flex-h {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+div.flex-h { flex-direction: column; }
+.w-100 { width: 100%; }
+.white-box {
+    border: 1px solid rgb(235, 234, 234);
+    border-radius: 10px;
+    padding: 10px;
+}
+/** --- **/
+
+
+/** 좌상 로고 **/
+#main-logo {
+    display: block; position: absolute;
+    width: fit-content; height: fit-content;
+    left: 0; top: 0;
+    transform: scale(0.5) translate(-50%, -50%);
+    background-image: url('../images/main_logo.gif');
+    background-repeat: no-repeat;
+    width: 550px; height: 280px;
+}
+/** --- **/
+
+
+/** 검색창 **/
+#search-box {
+    display: flex;
+    width: 638px;
+    border: 1px solid var(--event-color);
+    border-radius: 100px;
+    padding: 17px 27px;
+    align-items: center;
+    margin-bottom: 8px;
+}
+#search-input {
+    flex: 1; height: calc(100% + 14px);
+    font-size: 17px;
+    font-weight: 900;
+}
+#display-v-keyboard {
+    background-image: url('../images/icon_set_default.png');
+    width: 28px; height: 15px;
+    background-size: 477px 470px;
+    background-position: -277px -287px;
+    margin-right: 10px;
+}
+#open-search-history {
+    background-image: url('../images/icon_set_default.png');
+    width: 10px; height: 8px;
+    background-size: 470px 470px;
+    background-position: -460px -421px;
+    margin-right: 14px;
+}
+#search-button {
+    background-image: url('../images/icon_set_default.png');
+    width: 24px; height: 24px;
+    background-size: 470px 470px;
+    background-position: -346px -20px;
+    filter: hue-rotate(235deg);
+}
+/** --- **/
+
+
+/** 메인 컨텐츠 **/
+main {
+    display: flex;
+    width: 1280px;
+    gap: 20px;
+}
+.main-box {
+    display: flex;
+    width: 60%;
+    padding: 5px;
+    border: 10px;
+    flex: 2;
+    flex-direction: column;
+    gap: 15px;
+}
+aside {
+    width: 30%;
+    flex: 1;
+}
+.main-ad { 
+    width: 100%;
+}
+.main-ad > a {
+    display: block;
+    width: 100%;
+}
+.main-ad > a > img {
+    border-radius: 10px;
+}
+/** --- **/
+
+#block-menu-wrapper {
+    justify-content: space-between;
+    padding: 20px;
+    padding-bottom: 0;
+}
+#block-menu {
+    gap: 10px;
+    color: lightgray;
+}
+#block-menu > a {
+    color: gray;
+}
+#block-menu > a.select {
+    color: black;
+    font-weight: bold;
+}
+
+.left-button, .right-button {
+    display: flex;
+    width: 40px; height: 40px;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    align-items: center;
+    justify-content: center;
+}
+.left-button > div.img, .right-button > div.img {
+    width: 10px; height: 10px;
+    background-image: url('../images/icon_set_default.png');
+    background-repeat: no-repeat;
+    background-size: 400px;
+    background-position: -389px -190px;
+}
+.left-button > div.img {
+    transform: rotate(180deg);
+}
+
+/* 플로팅 버튼 */
+.floating-buttons {
+    display: flex; position: fixed;
+    right: 25px; bottom: 25px;
+    gap: 10px;
+}
+.floating-button {
+    display: flex;
+    width: 40px; height: 40px;
+    border-radius: 200px;
+    border: 1px solid lightgray;
+    box-shadow: 0 4px 5px 0 #aaa6;
+    background: white;
+    justify-content: center;
+    align-items: center;
+}
+div.img.go-top {
+    width: 15px; height: 15px;
+    background-image: url('../images/icon_set_default.png');
+    background-repeat: no-repeat;
+    background-size: 450px;
+    background-position: -192px -322px;
+}
+div.img.settings {
+    width: 15px; height: 15px;
+    background-image: url('../images/icon_set_default.png');
+    background-repeat: no-repeat;
+    background-size: 450px;
+    background-position: -196px -170px;
+}
+/* ----- */

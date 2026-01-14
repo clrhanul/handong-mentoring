@@ -1,0 +1,48 @@
+header {
+    display: flex; position: absolute;
+    width: 100%; height: 52px;
+    top: 0;
+
+    justify-content: space-between;
+}
+
+header > div {
+    display: flex;
+    left: 0; top: 0;
+}
+header > div > a {
+    display: flex;
+    aspect-ratio: 1; height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-item {
+    display: block;
+    background-image: url('../images/icon_set_default.png');
+    width: 65%; height: 65%;
+    background-size: 480px 480px;
+    background-position: var(--p);
+}
+
+#header-menu  { --p: -318px -159px; }
+#header-n-pay { --p: 0px -334px; }
+#header-noti  { --p: -319px -228px; }
+#header-shop  { --p: -67px -334px; }
+
+#header-shop {
+    position: relative;
+}
+#shop-noti-count {
+    display: flex; position: absolute;
+    width: 15px; height: 15px;
+    right: -5px; top: 2px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px;
+}
