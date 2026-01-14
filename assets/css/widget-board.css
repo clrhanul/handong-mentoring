@@ -1,0 +1,103 @@
+.widget-board {
+    background: #f8f8f8;
+    padding: 20px;
+}
+.widget-board .title {
+    display: block;
+    font-size: 16px;
+    margin: 0 0 10px 0;
+}
+.widget-board .white-box {
+    background: white;
+}
+.calendar {
+    padding: 15px 15px;
+}
+.real-calendar {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    font-size: 12px;
+    gap: 2px;
+}
+.real-calendar p, .real-calendar b {
+    display: flex;
+    justify-content: center;
+}
+.real-calendar p[red=''], .real-calendar b[red=''] {
+    color: rgb(245, 80, 80);
+}
+div.img.vibe {
+    width: 69px; height: 20px;
+    background-image: url('../images/icon_set_default.png');
+    background-size: 500px;
+    background-position: -69px -320px;
+    background-repeat: no-repeat;
+}
+div.img.other-fyp {
+    width: 20px; height: 20px;
+    background-image: url('../images/icon_set_default.png');
+    background-size: 500px;
+    background-position: -215px -130px;
+    background-repeat: no-repeat;
+}
+.n-vibe .title {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+.n-vide .play-button {
+    background-image: url('../images/icon_set_default.png');
+    background-size: 0;
+    background-position: 0;
+    background-repeat: no-repeat;
+}
+
+.open-naver-m {
+    font-size: 15px;
+    padding: 15px 0 0 0;
+}
+.open-naver-m div.img {
+    width: 25px; height: 25px;
+    background-image: url("../images/icon_set_default.png");
+    background-size: 500px;
+    background-position: -128px -423px;
+    background-repeat: no-repeat;
+}
+
+div.vibe-item {
+    position: relative;
+    height: 118px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    background-image: url("../images/dthumb17.png");
+    background-size: contain;
+    color: white;
+}
+div.vibe-item > p {
+    display: flex;
+    height: 108px;
+    backdrop-filter: brightness(0.8);
+    align-items: flex-end;
+    padding: 5px;
+    font-size: 14px;
+    font-weight: 500;
+}
+div.vibe-item::after {
+    content: '▶';
+    display: flex;
+    position: absolute;
+    top: 5px; right: 5px;
+    background: #0004;
+    border-radius: 200px;
+    width: 30px; height: 30px;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+}
+div.img.info {
+    width: 16px; height: 16px;
+    background-image: url("../images/icon_set_default.png");
+    background-size: 500px;
+    background-position: -275px -375px;
+    background-repeat: no-repeat;
+}
