@@ -1,0 +1,20 @@
+@media (max-width: 1280px) {
+  #root {
+    min-height: none;
+    width: 100%;
+  }
+  main {
+    display: flex;
+    width: 986px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  main > .main-box {
+    width: 100%;
+  }
+  main > aside {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+  }
+}
