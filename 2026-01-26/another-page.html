@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Camera-261624.png</title>
+  <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon">
+
+  <style>
+    * {
+      padding: 0; margin: 0;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      background-color: #000;
+      overflow: hidden;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .wh100 {
+      width: 100%; height: 100%;
+    }
+
+    .flex-v {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .flex-h {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #root {
+      position: relative;
+      width: 100%;
+    }
+    #image-main {
+      width: 100%; height: 100%;
+    }
+    #image-main img {
+      width: 100%;
+    }
+    #info-overlay-top {
+      position: absolute;
+      width: calc(100% - 30px); height: calc(100% - 30px);
+      left: 0; top: 0;
+      background: linear-gradient(180deg, #000a, transparent 50%);
+      color: white;
+      padding: 15px;
+    }
+    #info-overlay-bottom {
+      position: absolute;
+      width: calc(100% - 30px); height: calc(100% - 30px);
+      left: 0; bottom: 0;
+      background: linear-gradient(0deg, #000a, transparent 50%);
+      color: white;
+      padding: 15px;
+    }
+
+    #buttons {
+      display: flex; position: absolute; z-index: 1;
+      bottom: 10px; left: 15px;
+      gap: 10px;
+    }
+    #buttons button {
+      width: 40px; height: 40px;
+    }
+    #close-button {
+      display: flex; position: absolute;
+      width: 40px; height: 40px;
+      top: 10px; right: 15px;
+      border-radius: 100px;
+      background-color: #0004;
+      font-size: 20px;
+      border: 1px solid gray;
+      color: white;
+      cursor: pointer;
+      justify-content: center;
+      align-items: center;
+    }
+    #close-button:hover {
+      background-color: #fff4;
+    }
+    #tags {
+      display: flex; position: absolute;
+      flex-wrap: wrap;
+      right: 5px; bottom: 5px;
+      width: 200px;
+      gap: 5px;
+      justify-content: space-around;
+    }
+    .image-tag, #add-tag {
+      padding: 2px 7px;
+      border: 1px solid white;
+      border-radius: 100px;
+      color: white;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div id="root" class="wh100">
+    <div class="wh100 flex-v" style="width: fit-content;">
+      <div class="wh100 flex-h" style="height: fit-content;">
+        <div id="image-main"><img src="./images/image-item1.jpg" alt=""></div>
+      </div>
+    </div>
+
+    <div id="buttons">
+      <button id="zoom-button">zoom</button>
+      <button id="copy-button">copy</button>
+    </div>
+
+    <div id="info-overlay-top">
+      <h2 class="image-title">Camera-261624.png</h2>
+      <p class="image-time">2026-01-01 14:24:50</p>
+    </div>
+    <div id="info-overlay-bottom"></div>
+
+    <div id="tags">
+      <div class="image-tag">풍경</div>
+      <div class="image-tag">나무</div>
+      <div class="image-tag">이쁨</div>
+      <div class="image-tag">그림</div>
+      <div class="image-tag">구름</div>
+      <div class="image-tag">강</div>
+      <div class="image-tag">무슨 태그</div>
+      <div class="image-tag">뭐시기 저시기</div>
+      <div id="add-tag">+</div>
+    </div>
+
+    <a id="close-button" href="/handong-mentoring/2026-01-26/my-page.html">×</a>
+  </div>
+</body>
+</html>
