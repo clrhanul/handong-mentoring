@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>갤러리</title>
+
+    <link rel="shortcut icon" href="./images/logo.png" type="image/x-icon">
+
+    <style>
+        @font-face {
+            font-family: 'Cafe24Surround';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');
+            font-weight: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'YesMyungjo';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/YESMyoungjo-Regular.woff') format('woff');
+            font-weight: normal;
+            font-display: swap;
+        }
+        * {
+            margin: 0; padding: 0;
+        }
+        :root {
+            --header-size: 80px;
+            --side-size: 300px;
+        }
+
+        html, body, main {
+            width: 100%;
+            font-family: 'YesMyungjo';
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        summary {
+            list-style: none;
+            cursor: pointer;
+        }
+        summary::-webkit-details-marker { display: none; }
+
+
+        main {
+            min-height: 500px;
+        }
+        footer {
+            width: 100%; min-height: 200px;
+            padding: 50px 0;
+            background-color: lightgoldenrodyellow;
+        }
+        .flex-v {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .flex-h {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        header {
+            position: fixed; z-index: 3;
+            width: 100%; height: var(--header-size);
+            background-color: white;
+            border-bottom: 4px solid rgb(196, 245, 232);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        #left-nav, #right-nav {
+            width: 40%; height: 100%;
+            justify-content: space-around;
+            font-size: 18px;
+        }
+        .nav-item {
+            position: relative;
+            width: 40%; height: 100%;
+            font-weight: 900;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            left: calc(90px - 8%); bottom: 30%;
+            width: 0%; height: 5px;
+            background: rgb(51, 54, 255);
+            opacity: 0.5;
+            transition: width 0.5s ease;
+        }
+        .nav-item:hover::after {
+            width: 40%;
+        }
+        .nav-item > summary {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%; height: 100%;
+        }
+        .nav-item-list {
+            display: flex;
+            width: calc(100% - 8px - 20px);
+            padding: 10px 10px;
+            border: 4px solid rgb(196, 245, 232);
+            border-top: 0;
+            flex-direction: column;
+            gap: 10px;
+            list-style-type: none;
+            background: white;
+            border-radius: 0 0 20px 20px;
+        }
+        .nav-item-list-item {
+            display: flex;
+            width: 100%;
+            cursor: pointer;
+            justify-content: center;
+        }
+        .nav-item-list-item:hover {
+            text-decoration: underline;
+        }
+        .nav-item {
+            interpolate-size: allow-keywords;
+
+            &::details-content {
+                transition: block-size 0.5s, content-visibility 0.5s allow-discrete;
+                overflow: hidden;
+                block-size: 0;
+            }
+            &[open]::details-content {
+                block-size: auto;
+            }
+        }
+        #logo {
+            font-family: 'Cafe24Surround';
+            gap: 5px;
+            transition: 0.5s;
+            white-space: nowrap;
+        }
+        #logo:hover {
+            transform: scale(1.15);
+        }
+        #logo-img {
+            width: 50px; height: 50px;
+        }
+        #logo-img > img {
+            width: 100%; height: 100%;
+        }
+
+
+        #menu-icon {
+            position: fixed; z-index: 2;
+            bottom: 5px; left: 10px;
+            width: 30px; height: 30px;
+            background: white;
+            border-radius: 50px;
+            padding: 10px;
+            border: 2px solid lightgray;
+        }
+        #menu-icon > img {
+            width: 100%; height: 100%;
+        }
+        #menu-pannel {
+            position: fixed; z-index: 1;
+            width: var(--side-size); height: calc(100% - var(--header-size) - 70px);
+            padding: 0 0 70px 100px;
+            background-color: white;
+            border-right: 4px solid rgb(196, 245, 232);
+            top: var(--header-size); left: calc(0px - var(--side-size) - 100px - 4px - 25px);
+            transition: left 1s cubic-bezier(0.59,-0.94, 0, 1.73);
+            box-shadow: 0 0 15px 10px rgba(196, 245, 232, 0.356);
+        }
+        #menu-list {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            /* align-items: center; */
+            padding: 20px;
+            padding-bottom: 0;
+        }
+        #menu-list li {
+            display: flex;
+            height: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            align-items: center;
+        }
+        #menu-list li::before {
+            content: "📆 ";
+        }
+        #menu-list li:hover {
+            text-decoration: underline;
+        }
+        #side-wrap[open] + #menu-pannel {
+            left: -100px;
+            transition-duration: 0.5s;
+        }
+
+
+        main {
+            display: flex;
+            justify-content: center;
+            padding-top: calc(var(--header-size) + 50px);
+            padding-bottom: 50px;
+        }
+        #image-list {
+            display: grid;
+            width: 80%;
+            padding: 20px;
+            gap: 20px;
+        }
+        .image-group {
+            display: grid;
+            width: 100%;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-bottom: 50px;
+        }
+        .image-item {
+            display: flex; position: relative;
+            width: calc(100% - 6px); aspect-ratio: 1;
+            border: 3px solid;
+            border-radius: 12px;
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.5s ease;
+            box-shadow: 0 0 10px 2px rgba(32, 32, 32, 0.274);
+            cursor: zoom-in;
+        }
+        .image-item:hover {
+            transform: scale(1.1) rotate3d(0, 0, 1, 2deg);
+        }
+        .image-item img {
+            width: 100%; height: 100%;
+        }
+        .image-item:hover > .image-info {
+            opacity: 1;
+        }
+        .image-info {
+            display: flex; position: absolute;
+            opacity: 0;
+            top: 0; left: 0;
+            width: calc(100% - 20px); height: calc(100% - 20px);
+            padding: 10px;
+            background: #0006;
+            flex-direction: column;
+            justify-content: space-between;
+            color: white;
+            transition: opacity 0.3s ease-out;
+        }
+        .image-info-top, .image-info-bottom {
+            width: 100%;
+        }
+        .image-title {
+            width: 100%;
+            font-weight: 600;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+        }
+        .image-time {
+            font-size: 12px;
+        }
+        .image-tags {
+            display: flex;
+            overflow: hidden;
+            width: 1000px; height: 20px;
+            gap: 5px;
+        }
+        .image-tag {
+            display: flex;
+            width: fit-content;
+            border: 1px solid white;
+            border-radius: 100px;
+            padding: 5px;
+            justify-content: center; align-items: center;
+            font-size: 12px;
+        }
+
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+        #footer-about-list {
+            grid-template-columns: 1fr;
+        }
+    </style>
+    <style>
+        @media (max-width: 820px) {
+            #footer-v-info {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+            #footer-about-list {
+                grid-template-columns: 1fr;
+                & p {
+                    margin-bottom: 10px;
+                }
+            }
+            .image-group {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .image-title {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="anchor-top"></div>
+    <header>
+        <nav class="flex-v" id="left-nav">
+            <details class="nav-item" href="#">
+                <summary>미디어 편집</summary>
+                <ul class="nav-item-list">
+                    <li class="nav-item-list-item">1</li>
+                    <li class="nav-item-list-item">2</li>
+                    <li class="nav-item-list-item">3</li>
+                    <hr>
+                    <li class="nav-item-list-item">4</li>
+                    <li class="nav-item-list-item">5</li>
+                    <li class="nav-item-list-item">6</li>
+                </ul>
+            </details>
+            
+            <details class="nav-item" href="#">
+                <summary>종합 관리</summary>
+                <ul class="nav-item-list">
+                    <li class="nav-item-list-item">1</li>
+                    <hr>
+                    <li class="nav-item-list-item">2</li>
+                    <li class="nav-item-list-item">3</li>
+                    <hr>
+                    <li class="nav-item-list-item">4</li>
+                </ul>
+            </details>
+        </nav>
+
+        <a class="flex-v" id="logo" href="#">
+            <div id="logo-img"><img src="./images/logo.png" alt=""></div>
+            <h2>갤러리</h2>
+        </a>
+
+        <nav class="flex-v" id="right-nav">
+            <details class="nav-item" href="#">
+                <summary>도움말</summary>
+                <ul class="nav-item-list">
+                    <li class="nav-item-list-item">1</li>
+                    <li class="nav-item-list-item">2</li>
+                </ul>
+            </details>
+            <details class="nav-item" href="#">
+                <summary>기타 작업</summary>
+                <ul class="nav-item-list">
+                    <li class="nav-item-list-item">1</li>
+                    <hr>
+                    <li class="nav-item-list-item">2</li>
+                    <hr>
+                    <li class="nav-item-list-item">3</li>
+                    <li class="nav-item-list-item">4</li>
+                    <hr>
+                    <li class="nav-item-list-item">5</li>
+                    <li class="nav-item-list-item">6</li>
+                    <li class="nav-item-list-item">7</li>
+                    <li class="nav-item-list-item">8</li>
+                    <li class="nav-item-list-item">9</li>
+                    <hr>
+                    <li class="nav-item-list-item">10</li>
+                    <li class="nav-item-list-item">11</li>
+                    <li class="nav-item-list-item">12</li>
+                </ul>
+            </details>
+        </nav>
+    </header>
+
+    <details id="side-wrap">
+        <summary><div id="menu-icon"><img src="./images/menu.png" alt=""></div></summary>
+    </details>
+    <aside id="menu-pannel">
+        <ul id="menu-list">
+            <li><a href="#">2026 02</a></li>
+            <li><a href="#">2026 01</a></li>
+            <hr>
+            <li><a href="#">2025 12</a></li>
+            <li><a href="#">2025 10</a></li>
+            <li><a href="#">2025 6</a></li>
+            <li><a href="#">2025 2</a></li>
+            <hr>
+            <li><a href="#">2024 1</a></li>
+            <hr>
+            <li><a href="#">2023 12</a></li>
+            <li><a href="#">2023 6</a></li>
+            <li><a href="#">2023 3</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <div id="image-list">
+            <h2>2026 01</h2>
+            <hr>
+            <div class="image-group">
+                <div class="image-item">
+                    <img src="./images/image-item1.jpg" alt="">
+                    <div class="image-info">
+                        <div class="image-info-top">
+                            <p class="image-title">Camera-261624.png</p>
+                            <p class="image-time">2026-01-01 14:24:50</p>
+                        </div>
+                        <div class="image-info-bottom">
+                            <div class="image-tags"> <div class="image-tag">풍경</div> <div class="image-tag">나무</div> <div class="image-tag">이쁨</div> <div class="image-tag">그림</div> <div class="image-tag">구름</div> <div class="image-tag">강</div> <div class="image-tag">무슨 태그</div> <div class="image-tag">뭐시기 저시기</div> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="./images/image-item1.jpg" alt="">
+                    <div class="image-info">
+                        <div class="image-info-top">
+                            <p class="image-title">Camera-261624.png</p>
+                            <p class="image-time">2026-01-01 14:24:50</p>
+                        </div>
+                        <div class="image-info-bottom">
+                            <div class="image-tags"> <div class="image-tag">풍경</div> <div class="image-tag">나무</div> <div class="image-tag">이쁨</div> <div class="image-tag">그림</div> <div class="image-tag">구름</div> <div class="image-tag">강</div> <div class="image-tag">무슨 태그</div> <div class="image-tag">뭐시기 저시기</div> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="./images/image-item1.jpg" alt="">
+                    <div class="image-info">
+                        <div class="image-info-top">
+                            <p class="image-title">Camera-261624.png</p>
+                            <p class="image-time">2026-01-01 14:24:50</p>
+                        </div>
+                        <div class="image-info-bottom">
+                            <div class="image-tags"> <div class="image-tag">풍경</div> <div class="image-tag">나무</div> <div class="image-tag">이쁨</div> <div class="image-tag">그림</div> <div class="image-tag">구름</div> <div class="image-tag">강</div> <div class="image-tag">무슨 태그</div> <div class="image-tag">뭐시기 저시기</div> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>2025 09</h2>
+            <hr>
+            <div class="image-group">
+                <div class="image-item">
+                    <img src="./images/image-item1.jpg" alt="">
+                    <div class="image-info">
+                        <div class="image-info-top">
+                            <p class="image-title">Camera-261624.png</p>
+                            <p class="image-time">2026-01-01 14:24:50</p>
+                        </div>
+                        <div class="image-info-bottom">
+                            <div class="image-tags"> <div class="image-tag">풍경</div> <div class="image-tag">나무</div> <div class="image-tag">이쁨</div> <div class="image-tag">그림</div> <div class="image-tag">구름</div> <div class="image-tag">강</div> <div class="image-tag">무슨 태그</div> <div class="image-tag">뭐시기 저시기</div> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2>2025 03</h2>
+            <hr>
+            <div class="image-group">
+                <div class="image-item">
+                    <img src="./images/image-item1.jpg" alt="">
+                    <div class="image-info">
+                        <div class="image-info-top">
+                            <p class="image-title">Camera-261624.png</p>
+                            <p class="image-time">2026-01-01 14:24:50</p>
+                        </div>
+                        <div class="image-info-bottom">
+                            <div class="image-tags"> <div class="image-tag">풍경</div> <div class="image-tag">나무</div> <div class="image-tag">이쁨</div> <div class="image-tag">그림</div> <div class="image-tag">구름</div> <div class="image-tag">강</div> <div class="image-tag">무슨 태그</div> <div class="image-tag">뭐시기 저시기</div> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="./images/image-item1.jpg" alt="">
+                    <div class="image-info">
+                        <div class="image-info-top">
+                            <p class="image-title">Camera-261624.png</p>
+                            <p class="image-time">2026-01-01 14:24:50</p>
+                        </div>
+                        <div class="image-info-bottom">
+                            <div class="image-tags"> <div class="image-tag">풍경</div> <div class="image-tag">나무</div> <div class="image-tag">이쁨</div> <div class="image-tag">그림</div> <div class="image-tag">구름</div> <div class="image-tag">강</div> <div class="image-tag">무슨 태그</div> <div class="image-tag">뭐시기 저시기</div> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="./images/image-item1.jpg" alt="">
+                    <div class="image-info">
+                        <div class="image-info-top">
+                            <p class="image-title">Camera-261624.png</p>
+                            <p class="image-time">2026-01-01 14:24:50</p>
+                        </div>
+                        <div class="image-info-bottom">
+                            <div class="image-tags"> <div class="image-tag">풍경</div> <div class="image-tag">나무</div> <div class="image-tag">이쁨</div> <div class="image-tag">그림</div> <div class="image-tag">구름</div> <div class="image-tag">강</div> <div class="image-tag">무슨 태그</div> <div class="image-tag">뭐시기 저시기</div> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="./images/image-item1.jpg" alt="">
+                    <div class="image-info">
+                        <div class="image-info-top">
+                            <p class="image-title">Camera-261624.png</p>
+                            <p class="image-time">2026-01-01 14:24:50</p>
+                        </div>
+                        <div class="image-info-bottom">
+                            <div class="image-tags"> <div class="image-tag">풍경</div> <div class="image-tag">나무</div> <div class="image-tag">이쁨</div> <div class="image-tag">그림</div> <div class="image-tag">구름</div> <div class="image-tag">강</div> <div class="image-tag">무슨 태그</div> <div class="image-tag">뭐시기 저시기</div> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="./images/image-item1.jpg" alt="">
+                    <div class="image-info">
+                        <div class="image-info-top">
+                            <p class="image-title">Camera-261624.png</p>
+                            <p class="image-time">2026-01-01 14:24:50</p>
+                        </div>
+                        <div class="image-info-bottom">
+                            <div class="image-tags"> <div class="image-tag">풍경</div> <div class="image-tag">나무</div> <div class="image-tag">이쁨</div> <div class="image-tag">그림</div> <div class="image-tag">구름</div> <div class="image-tag">강</div> <div class="image-tag">무슨 태그</div> <div class="image-tag">뭐시기 저시기</div> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="./images/image-item1.jpg" alt="">
+                    <div class="image-info">
+                        <div class="image-info-top">
+                            <p class="image-title">Camera-261624.png</p>
+                            <p class="image-time">2026-01-01 14:24:50</p>
+                        </div>
+                        <div class="image-info-bottom">
+                            <div class="image-tags"> <div class="image-tag">풍경</div> <div class="image-tag">나무</div> <div class="image-tag">이쁨</div> <div class="image-tag">그림</div> <div class="image-tag">구름</div> <div class="image-tag">강</div> <div class="image-tag">무슨 태그</div> <div class="image-tag">뭐시기 저시기</div> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="./images/image-item1.jpg" alt="">
+                    <div class="image-info">
+                        <div class="image-info-top">
+                            <p class="image-title">Camera-261624.png</p>
+                            <p class="image-time">2026-01-01 14:24:50</p>
+                        </div>
+                        <div class="image-info-bottom">
+                            <div class="image-tags"> <div class="image-tag">풍경</div> <div class="image-tag">나무</div> <div class="image-tag">이쁨</div> <div class="image-tag">그림</div> <div class="image-tag">구름</div> <div class="image-tag">강</div> <div class="image-tag">무슨 태그</div> <div class="image-tag">뭐시기 저시기</div> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="./images/image-item1.jpg" alt="">
+                    <div class="image-info">
+                        <div class="image-info-top">
+                            <p class="image-title">Camera-261624.png</p>
+                            <p class="image-time">2026-01-01 14:24:50</p>
+                        </div>
+                        <div class="image-info-bottom">
+                            <div class="image-tags"> <div class="image-tag">풍경</div> <div class="image-tag">나무</div> <div class="image-tag">이쁨</div> <div class="image-tag">그림</div> <div class="image-tag">구름</div> <div class="image-tag">강</div> <div class="image-tag">무슨 태그</div> <div class="image-tag">뭐시기 저시기</div> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-item">
+                    <img src="./images/image-item1.jpg" alt="">
+                    <div class="image-info">
+                        <div class="image-info-top">
+                            <p class="image-title">Camera-261624.png</p>
+                            <p class="image-time">2026-01-01 14:24:50</p>
+                        </div>
+                        <div class="image-info-bottom">
+                            <div class="image-tags"> <div class="image-tag">풍경</div> <div class="image-tag">나무</div> <div class="image-tag">이쁨</div> <div class="image-tag">그림</div> <div class="image-tag">구름</div> <div class="image-tag">강</div> <div class="image-tag">무슨 태그</div> <div class="image-tag">뭐시기 저시기</div> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="flex-h" style="justify-content: start; gap: 20px;">
+        <div id="footer-v-info" class="flex-v" style="width: calc(100% - 100px); justify-content: space-around; align-items: start; gap: 100px; padding: 0 50px;">
+            <div style="flex: 1.5;">
+                <h3>About</h3>
+                <hr>
+                <div id="footer-about-list" style="display: grid; gap: 10px;">
+                    <b>상호명</b>          <p>㈜아버지호출</p>
+                    <b>대표</b>            <p>홍길동</p>
+                    <b>사업자 등록번호</b> <p>012-34-567890</p>
+                    <b>Tel.</b>            <p>010-1234-5678</p>
+                    <b>Fax.</b>            <p>012-3456-7890</p>
+                    <b>Addr.</b>           <p>대한민국 경기도 우천시 취소 12-34 13473</p>
+                </div>
+            </div>
+            <div style="flex: 1;">
+                <h3>What</h3>
+                <hr>
+                <div style="display: grid; grid-template-columns: 1fr 3fr; gap: 5px;">
+                    <b>아 뭐 넣지</b>
+                </div>
+            </div>
+            <div style="flex: 0.5;">
+                <h3>바로가기</h3>
+                <hr>
+                <div style="display: grid; gap: 5px;">
+                    <a href="#">홈</a>
+                    <a href="#">갤러리 엔진</a>
+                    <a href="#">한글 편집기</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex-h">
+            <h3>Contact Us</h3>
+            <div class="flex-v" style="gap: 20px;">
+                <a href="#">Youtube</a>
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Discord</a>
+                <a href="#">X(Twitter)</a>
+            </div>
+        </div>
+        <hr style="width: 90%;">
+        <a href="#anchor-top">TOP으로 이동</a>
+    </footer>
+</body>
+</html>
